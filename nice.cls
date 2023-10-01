@@ -1,17 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{nice}[]
 
-% option foot # side
-% option numdepth : depth of section numbering
-%          casual : numdepth = -3 : rien numéroté, ni les figures et les sections
-%        tocdepth
-%    bibliography
-
 \LoadClassWithOptions{article}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[tabular]{ebgaramond}
+\RequirePackage[scaled=.8]{inter}
 \RequirePackage{ebgaramond-maths}
 \RequirePackage[
 	defaultmono,
@@ -22,14 +17,15 @@
 \RequirePackage[]{mwe}
 \RequirePackage{booktabs}
 \RequirePackage{csquotes}
-\RequirePackage{graphicx}
+
+\RequirePackage[]{fullwidth}
+
 \RequirePackage[
 	autocite = superscript,
 	backend = biber,
 	% citecolor = niceBlue,
 	style = chicago-authordate,
 	sorting = anyt,
-	texencoding = ascii,
     bibencoding = utf8,
 ]{biblatex}
 \renewcommand{\cite}[1]{\footnote{\fullcite{#1}.}}
@@ -52,7 +48,7 @@
 \RequirePackage{lettrine}
 \RequirePackage[]{setspace}
 \AtBeginDocument{%
-    \setstretch{1.12}
+    \setstretch{1.18}
 }
 \RequirePackage[]{fancyhdr}
 \RequirePackage[]{textcase}
@@ -70,8 +66,8 @@
 \setlength{\headheight}{13.6pt}
 
 \RequirePackage[
-    perpage,
-    symbol*,
+    % perpage,
+    %symbol*,
     flushmargin,
     side,
     ragged,
@@ -152,26 +148,31 @@
 \makeatletter
 \newcommand\@maketitlebis{%
 	\hfill
-	\begin{quote}
+    \bgroup
     \setstretch{1.0}
 		\vskip -40pt
 		\let\footnote\thanks
 		{\huge\raggedright \@title \par }
-		\vskip 10pt
-		{\large \itshape \@author{}~~$\cdot$~~\@date}
+		\vskip 12pt
+        {\noindent\Large\@subtitle \par}
+        \vskip 24pt
+		{\noindent\large \itshape \@author{}~~$\cdot$~~\@date}
 		\vskip 60pt~
-	\end{quote}
+    \egroup
 	\setstretch{1.12}
 }
 \renewcommand\maketitle{
 	\@maketitlebis
 	\thispagestyle{empty}
 }
+
+\newcommand\subtitle[1]{\renewcommand\@subtitle{#1}}
+\newcommand\@subtitle{}
 \makeatother
 
 \RequirePackage[hypcap=false]{caption}
 \captionsetup{
-    labelformat=empty,
+    %labelformat=empty,
     labelfont=it, textfont=it,
 	%labelformat = lc,
 	justification=RaggedRight,
@@ -180,7 +181,7 @@
 }
 
 \DeclareCaptionStyle{sidecaption}{
-    labelformat=empty,
+    %labelformat=empty,
     labelfont=it, textfont=it,
 	%labelformat = lc,
 	justification=RaggedRight,
@@ -193,4 +194,11 @@
 \setcounter{tocdepth}{2}
 \AtBeginDocument{\setlength{\parskip}{0pt}}
 
-\AddToHook{cmd/section/before}{\clearpage}
+\AddToHook{cmd/section/before}{\cleardoublepage}
+
+\RequirePackage[]{enumitem}
+\AtBeginDocument{
+	\setlist{topsep=0pt, itemsep=0pt, noitemsep}
+}
+% bullets
+\renewcommand{\labelitemi}{$\cdot$}
