@@ -20,29 +20,37 @@
 
 \RequirePackage[]{fullwidth}
 
-\RequirePackage[
-	autocite = superscript,
-	backend = biber,
-	% citecolor = niceBlue,
-	style = chicago-authordate,
-	sorting = anyt,
-    bibencoding = utf8,
-]{biblatex}
-\renewcommand{\cite}[1]{\footnote{\fullcite{#1}.}}
-\newcommand\sidetextcite[2][]{\sidetext{\tl_if_empty:nTF{#1}{}{\vskip #1}%
-\@for\cle:={#2}\do{\makebox[0pt][r]{\autocite{\cle}}\fullcite{\cle}.\\}%
-}}
+% \RequirePackage{biblatex-chicago}
 
-\DeclareCiteCommand{\fullcite}
-  {\usebibmacro{prenote}}
-  {\clearfield{url}%
-   \clearfield{pagetotal}%
-   \clearfield{edition}%
-   \usedriver
-     {\DeclareNameAlias{sortname}{default}}
-     {\thefield{entrytype}}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
+\RequirePackage[
+    authordate,
+    backend=biber,
+    doi=false,
+    isbn=false,
+    url=false,
+]{biblatex-chicago}
+
+% \RequirePackage[
+% 	autocite = inline,
+% 	backend = biber,
+% 	% citecolor = niceBlue,
+% 	style = chicago-authordate,
+%     bibencoding = utf8,
+% ]{biblatex}
+% \newcommand\sidetextcite[2][]{\sidetext{\tl_if_empty:nTF{#1}{}{\vskip #1}%
+% \@for\cle:={#2}\do{\makebox[0pt][r]{\autocite{\cle}}\fullcite{\cle}.\\}%
+% }}
+
+% \DeclareCiteCommand{\fullcite}
+%   {\usebibmacro{prenote}}
+%   {\clearfield{url}%
+%    \clearfield{pagetotal}%
+%    \clearfield{edition}%
+%    \usedriver
+%      {\DeclareNameAlias{sortname}{default}}
+%      {\thefield{entrytype}}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
 
 \RequirePackage{emptypage}
 \RequirePackage{lettrine}
